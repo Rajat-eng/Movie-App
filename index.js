@@ -5,17 +5,19 @@ const IMG_URL='https://image.tmdb.org/t/p/w500';
 const searchURL=BASE_URL+'/search/movie?'+ API_KEY;
 let main=document.getElementById('main');
 
-
+// saving data to local storage
 function saveToLocal(data){
-    var movie_list=[];
+    var movie_list=[];// favorite list
     movie_list=JSON.parse(localStorage.getItem('session')) || [];
     for(let i=0;i<movie_list.length;i++){
+//         if already added then return
         if(data==movie_list[i]){
             alert("already added");
             return;
         }
     }
     movie_list.push(data);
+    alert("added");
     localStorage.setItem('session', JSON.stringify(movie_list));
 }
 
@@ -67,7 +69,7 @@ function getcolor(vote){
 const search=document.getElementById('search');
 document.getElementById('form').addEventListener('submit',(e)=>{
     e.preventDefault();
-    const searchTerm=search.value;
+    const searchTerm=search.value; // search value
     console.log(searchTerm);
         if(searchTerm){
             getMovies(searchURL+'&query='+searchTerm);
@@ -78,12 +80,7 @@ document.getElementById('form').addEventListener('submit',(e)=>{
 
 // Add fav movies to local storage
 function add(id){
-  
     saveToLocal(id);
-    // movie_list=JSON.parse(localStorage.getItem('movie'));
-    // movie_list.push(id);
-    // alert("added");
-    // localStorage.setItem('movies',JSON.stringify(movie_list));
 }
 
 
